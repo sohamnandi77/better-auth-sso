@@ -16,6 +16,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { signIn } from "@/lib/auth-client";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -24,6 +25,9 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackURL = searchParams?.get("callback_url");
 
   return (
     <Card className="z-50 rounded-md rounded-t-none max-w-md">
@@ -83,10 +87,16 @@ export default function SignIn() {
                 {
                   email: email,
                   password: password,
-                  callbackURL: "/dashboard",
                   dontRememberMe: !rememberMe,
                 },
                 {
+                  onSuccess: () => {
+                    if (callbackURL) {
+                      window.location.href = `${callbackURL}?${searchParams?.toString()}`;
+                    } else {
+                      router.push("/dashboard");
+                    }
+                  },
                   onRequest: () => {
                     setLoading(true);
                   },
