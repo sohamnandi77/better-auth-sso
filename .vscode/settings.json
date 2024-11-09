@@ -1,7 +1,48 @@
 {
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ]
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.format": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "tailwindCSS.classAttributes": ["class", "className"],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.lint.cssConflict": "error",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/[[]*[]]/[[]*[]]/page.tsx": "${dirname(2)}/${dirname(1)}/${dirname} - page",
+    "**/app/**/[[]*[]]/page.tsx": "${dirname(1)}/${dirname} - page",
+    "**/app/**/page.tsx": "${dirname} - page",
+
+    "**/app/**/[[]*[]]/[[]*[]]/default.tsx": "${dirname(2)}/${dirname(1)}/${dirname} - default",
+    "**/app/**/[[]*[]]/default.tsx": "${dirname(1)}/${dirname} - default",
+    "**/app/**/default.tsx": "${dirname} - default",
+
+    "**/app/**/[[]*[]]/[[]*[]]/layout.tsx": "${dirname(2)}/${dirname(1)}/${dirname} - layout",
+    "**/app/**/[[]*[]]/layout.tsx": "${dirname(1)}/${dirname} - layout",
+    "**/app/**/layout.tsx": "${dirname} - layout",
+
+    "**/app/**/[[]*[]]/[[]*[]]/template.tsx": "${dirname(2)}/${dirname(1)}/${dirname} - template",
+    "**/app/**/[[]*[]]/template.tsx": "${dirname(1)}/${dirname} - template",
+    "**/app/**/template.tsx": "${dirname} - template",
+
+    "**/app/**/[[]*[]]/[[]*[]]/error.tsx": "${dirname(2)}/${dirname(1)}/${dirname} - error",
+    "**/app/**/[[]*[]]/error.tsx": "${dirname(1)}/${dirname} - error",
+    "**/app/**/error.tsx": "${dirname} - error",
+
+    "**/src/app/api/**/[...path]/route.ts": "${dirname} - API route",
+    "**/src/app/api/**/route.ts": "${dirname} - API"
+  }
 }

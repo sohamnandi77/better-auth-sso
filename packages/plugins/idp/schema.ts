@@ -12,13 +12,13 @@ export const VALID_SCOPES = [
 ] as const;
 
 export const ssoOptionsSchema = z.object({
-  authorizationUrl: z.string().url(),
   clientId: z.string(),
-  codeChallengeMethod: z.enum(VALID_CODE_CHALLENGE_METHODS),
-  errorRedirectURI: z.string().url().optional(),
+  authorizationUrl: z.string().url(),
   redirectURI: z.string().url(),
-  responseType: z.string().optional(),
   scopes: z.array(z.enum(VALID_SCOPES)),
+  errorRedirectURI: z.string().url().optional(),
+  codeChallengeMethod: z.enum(VALID_CODE_CHALLENGE_METHODS).optional(),
+  responseType: z.string().optional(),
 });
 
 export const querySchema = z.object({

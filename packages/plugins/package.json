@@ -1,0 +1,15 @@
+{
+  "name": "@demo/plugins",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./idp": "./idp/index.ts",
+    "./idp-client": "./idp/client.ts"
+  },
+  "dependencies": {
+    "better-auth": "0.8.1-beta.4",
+    "oslo": "^1.2.1",
+    "typescript": "^5.6.3",
+    "zod": "^3.23.8"
+  }
+}

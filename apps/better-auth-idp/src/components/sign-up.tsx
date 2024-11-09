@@ -15,6 +15,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { signUp } from "@/lib/auth-client";
 import { Loader2, X } from "lucide-react";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -39,6 +40,11 @@ export function SignUp() {
     }
   };
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackURL = searchParams?.get("callback_url");
+
+  console.log(callbackURL, `${callbackURL}?${searchParams?.toString()}`);
 
   return (
     <Card className="z-50 rounded-md rounded-t-none max-w-md">
@@ -152,8 +158,14 @@ export function SignUp() {
                 password,
                 name: `${firstName} ${lastName}`,
                 image: image ? await convertImageToBase64(image) : "",
-                callbackURL: "/dashboard",
                 fetchOptions: {
+                  onSuccess: () => {
+                    if (callbackURL) {
+                      window.location.href = `${callbackURL}?${searchParams?.toString()}`;
+                    } else {
+                      router.push("/dashboard");
+                    }
+                  },
                   onResponse: () => {
                     setLoading(false);
                   },

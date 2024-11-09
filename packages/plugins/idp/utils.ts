@@ -21,6 +21,8 @@ export const validateClientId = async (
     ],
   })) as typeof applicationSchema._type;
 
+  console.log(application);
+
   if (!application) {
     throw new APIError("BAD_REQUEST", {
       message: "Invalid client_id",
@@ -34,7 +36,8 @@ export const validateRedirectUri = (
   application: typeof applicationSchema._type,
   redirectUri: string
 ) => {
-  if (!application.redirectUris.includes(redirectUri)) {
+  // ! TODO: Fix this
+  if (!Object.keys(application.redirectUris).includes(redirectUri)) {
     throw new APIError("BAD_REQUEST", {
       message: "Invalid redirect_uri",
     });
@@ -59,7 +62,8 @@ export const validateScope = (
 
   // Check if application is allowed these scopes
   const unauthorizedScopes = requestedScopes.filter(
-    (scope) => !application.allowedScopes.includes(scope)
+    // ! TODO: Fix this
+    (scope) => !Object.keys(application.allowedScopes).includes(scope)
   );
 
   if (unauthorizedScopes.length > 0) {
@@ -83,6 +87,7 @@ export const validateCodeChallenge = (
         message: `Invalid code challenge for method ${codeChallengeMethod}`,
       });
     }
+    return true;
   } else if (codeChallengeMethod === "plain") {
     // Plain should be between 43-128 characters
     if (codeChallenge.length < 43 || codeChallenge.length > 128) {
@@ -90,9 +95,10 @@ export const validateCodeChallenge = (
         message: `Invalid code challenge for method ${codeChallengeMethod}`,
       });
     }
+    return true;
   }
 
-  return true;
+  return false;
 };
 
 export const validateResponseType = (responseType: string) => {

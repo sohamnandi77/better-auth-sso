@@ -56,9 +56,6 @@ export const idpClient = () => {
   return {
     id: "idp",
     $InferServerPlugin: {} as ReturnType<typeof idp>,
-    pathMethods: {
-      "/authorize": "GET",
-    },
     getActions: ($fetch) => ({
       ssoLogin: (options: SsoOptions) => {
         try {

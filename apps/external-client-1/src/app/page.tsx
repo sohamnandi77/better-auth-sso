@@ -1,4 +1,7 @@
-import { SignInButton, SignInFallback } from "@/components/sign-in-btn";
+import {
+  AuthenticationStatusButton,
+  SignInFallback,
+} from "@/components/authentication-status-btn";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -7,12 +10,12 @@ export default async function Home() {
       <main className="flex flex-col gap-4 row-start-2 items-center justify-center">
         <div className="flex flex-col gap-1">
           <h3 className="font-bold text-4xl text-black dark:text-white text-center">
-            Better Auth IDP
+            External Client 1
           </h3>
         </div>
         <div className="md:w-10/12 w-full flex flex-col gap-4">
           <Suspense fallback={<SignInFallback />}>
-            <SignInButton />
+            <AuthenticationStatusButton />
           </Suspense>
         </div>
       </main>

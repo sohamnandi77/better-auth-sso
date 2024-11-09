@@ -1,10 +1,10 @@
 import { env } from "@/env";
+import { idp } from "@demo/plugins/idp";
 import { betterAuth } from "better-auth";
 import { bearer } from "better-auth/plugins";
 import { PostgresJSDialect } from "kysely-postgres-js";
 import postgres from "postgres";
 import { AUTH_CONFIG } from "./auth.config";
-import { idp } from "./plugins/idp";
 
 const dialect = new PostgresJSDialect({
   postgres: postgres(env.DATABASE_URL),
