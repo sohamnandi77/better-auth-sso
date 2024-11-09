@@ -1,6 +1,8 @@
 "use client";
 
+import { env } from "@/env";
 import { ssoLogin } from "@/lib/auth-client";
+import { AUTH_API_BASE_URL } from "@/lib/auth-config";
 import { Button } from "./ui/button";
 
 const SignInButton = () => {
@@ -12,9 +14,9 @@ const SignInButton = () => {
         onClick={() => {
           ssoLogin({
             clientId: "TdJIcbe16WxTHtN95nyywh5E4yOo6ItG",
-            authorizationUrl: "http://localhost:3000/api/auth/authorize",
-            redirectURI: "http://localhost:3001/dashboard",
-            errorRedirectURI: "http://localhost:3001/error",
+            authorizationUrl: `${AUTH_API_BASE_URL}/api/auth/authorize`,
+            redirectURI: `${env.NEXT_PUBLIC_AUTH_API_URL}/dashboard`,
+            errorRedirectURI: `${env.NEXT_PUBLIC_AUTH_API_URL}/error`,
             scopes: ["openid", "email", "profile"],
           });
         }}
