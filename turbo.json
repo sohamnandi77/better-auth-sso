@@ -19,14 +19,6 @@
         "GOOGLE_CLIENT_SECRET"
       ]
     },
-    "external-client-1#build": {
-      "dependsOn": ["^build"],
-      "env": [
-        "NEXT_PUBLIC_ENVIRONMENT",
-        "NEXT_PUBLIC_APP_URL",
-        "NEXT_PUBLIC_AUTH_API_URL"
-      ]
-    },
     "lint": {
       "dependsOn": ["^lint"]
     },
