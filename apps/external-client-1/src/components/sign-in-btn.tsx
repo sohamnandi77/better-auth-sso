@@ -15,8 +15,8 @@ const SignInButton = () => {
           ssoLogin({
             clientId: "TdJIcbe16WxTHtN95nyywh5E4yOo6ItG",
             authorizationUrl: `${AUTH_API_BASE_URL}/api/auth/authorize`,
-            redirectURI: `${env.NEXT_PUBLIC_AUTH_API_URL}/dashboard`,
-            errorRedirectURI: `${env.NEXT_PUBLIC_AUTH_API_URL}/error`,
+            redirectURI: `${env.NEXT_PUBLIC_APP_URL}/dashboard`,
+            errorRedirectURI: `${env.NEXT_PUBLIC_APP_URL}/error`,
             scopes: ["openid", "email", "profile"],
           });
         }}

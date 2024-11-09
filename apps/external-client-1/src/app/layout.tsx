@@ -8,8 +8,8 @@ import "./globals.css";
 
 export const metadata = createMetadata({
   title: {
-    template: "%s | Better Auth",
-    default: "Better Auth",
+    template: "%s | External Client",
+    default: "External Client",
   },
   description: "The most comprehensive authentication library for typescript",
   metadataBase: new URL("https://demo.better-auth.com"),

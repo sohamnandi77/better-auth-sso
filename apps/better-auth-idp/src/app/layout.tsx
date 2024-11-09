@@ -8,7 +8,7 @@ import "./globals.css";
 
 export const metadata = createMetadata({
   title: {
-    template: "%s | Better Auth",
+    template: "%s | Better Auth IDP",
     default: "Better Auth",
   },
   description: "The most comprehensive authentication library for typescript",
