@@ -68,6 +68,7 @@ export const idp = (options?: IdpOptions) =>
             response_type,
             scope,
             state,
+            dontRememberMe,
           } = queryString.data;
 
           // Fetch the application from the database
@@ -225,10 +226,19 @@ export const idp = (options?: IdpOptions) =>
           // });
 
           // Set the session cookie
-          await setSessionCookie(ctx, {
-            session: session.session,
-            user: session.user,
-          });
+          await setSessionCookie(
+            ctx,
+            {
+              session: session.session,
+              user: session.user,
+            },
+            dontRememberMe === "true" ? true : false,
+            {
+              httpOnly: true,
+              secure: true,
+              sameSite: "none",
+            }
+          );
 
           // Redirect to the redirect_uri with the authorization code and state
           const searchParams = new URLSearchParams({

@@ -31,6 +31,7 @@ export const querySchema = z.object({
   code_challenge_method: z.enum(VALID_CODE_CHALLENGE_METHODS),
   error_redirect_uri: z.string().url().optional(),
   consent: z.enum(["granted", "decline"]).optional(),
+  dontRememberMe: z.enum(["true", "false"]).optional(),
 });
 
 // Client and Application Schema
