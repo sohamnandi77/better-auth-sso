@@ -159,7 +159,9 @@ export function SignUp() {
                 fetchOptions: {
                   onSuccess: () => {
                     if (callbackURL) {
-                      window.location.href = `${callbackURL}?${searchParams?.toString()}`;
+                      const newSearchParams = new URLSearchParams(searchParams);
+                      newSearchParams.set("dontRememberMe", "true");
+                      window.location.href = `${callbackURL}?${newSearchParams?.toString()}`;
                     } else {
                       router.push("/dashboard");
                     }

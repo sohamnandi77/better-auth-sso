@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { ALLOWED_ORIGINS } from "./config";
 
 const nextConfig: NextConfig = {
   async headers() {
@@ -8,7 +9,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "*",
+            value: ALLOWED_ORIGINS.join(","),
           },
           {
             key: "Access-Control-Allow-Credentials",
@@ -20,7 +21,14 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Access-Control-Allow-Headers",
-            value: "Content-Type, Authorization",
+            // Add any additional headers you're using
+            value:
+              "Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",
+          },
+          {
+            // Add max age to reduce preflight requests
+            key: "Access-Control-Max-Age",
+            value: "7200",
           },
         ],
       },

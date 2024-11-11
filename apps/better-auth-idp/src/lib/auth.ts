@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { idp } from "@demo/plugins/idp";
+import { idp } from "@/lib/plugin/idp";
 import { betterAuth } from "better-auth";
 import { bearer } from "better-auth/plugins";
 import { PostgresJSDialect } from "kysely-postgres-js";

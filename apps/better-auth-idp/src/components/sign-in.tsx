@@ -87,13 +87,13 @@ export default function SignIn() {
                 {
                   email: email,
                   password: password,
-                  dontRememberMe: !rememberMe,
+                  rememberMe,
                 },
                 {
                   onSuccess: () => {
                     if (callbackURL) {
                       const newSearchParams = new URLSearchParams(searchParams);
-                      newSearchParams.set("dontRememberMe", "true");
+                      newSearchParams.set("rememberMe", rememberMe.toString());
                       window.location.href = `${callbackURL}?${newSearchParams?.toString()}`;
                     } else {
                       router.push("/dashboard");

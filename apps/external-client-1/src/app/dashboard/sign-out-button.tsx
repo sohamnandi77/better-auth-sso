@@ -16,9 +16,14 @@ export const SignOutButton = ({ headers }: { headers: Headers }) => {
       onClick={async () => {
         startTransition(async () => {
           await authApi.signOut({
-            headers,
+            headers: {
+              ...headers,
+              "Content-Type": "application/json",
+            },
             credentials: "include",
             onSuccess() {
+              sessionStorage.clear();
+              localStorage.clear();
               router.push("/");
             },
           });

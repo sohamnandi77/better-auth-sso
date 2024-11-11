@@ -1,8 +1,8 @@
 import { BetterAuthClientPlugin, BetterAuthError } from "better-auth";
 import { generateCodeVerifier, generateState } from "oslo/oauth2";
 import { z } from "zod";
-import type { idp } from ".";
 import { ssoOptionsSchema } from "./schema";
+import { generateCodeChallenge } from "./utils";
 
 export interface SsoOptions {
   /**
@@ -55,9 +55,8 @@ export interface SsoLoginResponse {
 export const idpClient = () => {
   return {
     id: "idp",
-    $InferServerPlugin: {} as ReturnType<typeof idp>,
     getActions: ($fetch) => ({
-      ssoLogin: (options: SsoOptions) => {
+      ssoLogin: async (options: SsoOptions) => {
         try {
           // browser check
           if (typeof window === "undefined" || !window.document) {
@@ -93,7 +92,9 @@ export const idpClient = () => {
           url.searchParams.set("state", state);
           url.searchParams.set("scope", scopes.join(" "));
           url.searchParams.set("redirect_uri", redirectURI);
-          url.searchParams.set("code_challenge", codeVerifier);
+
+          const codeChallenge = await generateCodeChallenge(codeVerifier);
+          url.searchParams.set("code_challenge", codeChallenge);
           url.searchParams.set(
             "code_challenge_method",
             codeChallengeMethod ?? "S256"
@@ -104,6 +105,7 @@ export const idpClient = () => {
           // store it in local storage
           if (localStorage) {
             localStorage.setItem("state", state);
+            localStorage.setItem("codeVerifier", codeVerifier);
           }
 
           // redirect to /authorize

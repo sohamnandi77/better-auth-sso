@@ -68,7 +68,7 @@ export const idp = (options?: IdpOptions) =>
             response_type,
             scope,
             state,
-            dontRememberMe,
+            rememberMe,
           } = queryString.data;
 
           // Fetch the application from the database
@@ -232,7 +232,7 @@ export const idp = (options?: IdpOptions) =>
               session: session.session,
               user: session.user,
             },
-            dontRememberMe === "true" ? true : false,
+            rememberMe === "true" ? false : true,
             {
               httpOnly: true,
               secure: true,
@@ -302,69 +302,69 @@ export const idp = (options?: IdpOptions) =>
           },
         },
       },
-      // authorizationCode: {
-      //   tableName: "authorizationCode",
-      //   fields: {
-      //     code: {
-      //       type: "string",
-      //       required: true,
-      //       unique: true,
-      //       returned: false, // Security: don't expose authorization codes
-      //     },
-      //     codeChallenge: {
-      //       type: "string",
-      //       required: true,
-      //       returned: false, // Security: don't expose code challenge
-      //     },
-      //     codeChallengeMethod: {
-      //       type: "string",
-      //       required: true,
-      //       returned: false,
-      //       validator: querySchema.pick({ code_challenge_method: true }),
-      //     },
-      //     scopes: {
-      //       type: "string[]",
-      //       required: true,
-      //       returned: false,
-      //       validator: applicationSchema.pick({ allowedScopes: true }),
-      //     },
-      //     used: {
-      //       type: "boolean",
-      //       required: false,
-      //       defaultValue: false,
-      //       returned: false,
-      //     },
-      //     expiresAt: {
-      //       type: "date",
-      //       required: true,
-      //       returned: false,
-      //     },
-      //     userId: {
-      //       type: "string",
-      //       required: true,
-      //       returned: false,
-      //       references: {
-      //         model: "user",
-      //         field: "id",
-      //       },
-      //     },
-      //     applicationId: {
-      //       type: "string",
-      //       required: true,
-      //       returned: false,
-      //       references: {
-      //         model: "application",
-      //         field: "id",
-      //       },
-      //     },
-      //     createdAt: {
-      //       type: "date",
-      //       required: true,
-      //       returned: false,
-      //       defaultValue: "now",
-      //     },
-      //   },
-      // },
+      authorizationCode: {
+        tableName: "authorizationCode",
+        fields: {
+          code: {
+            type: "string",
+            required: true,
+            unique: true,
+            returned: false, // Security: don't expose authorization codes
+          },
+          codeChallenge: {
+            type: "string",
+            required: true,
+            returned: false, // Security: don't expose code challenge
+          },
+          codeChallengeMethod: {
+            type: "string",
+            required: true,
+            returned: false,
+            validator: querySchema.pick({ code_challenge_method: true }),
+          },
+          scopes: {
+            type: "string[]",
+            required: true,
+            returned: false,
+            validator: applicationSchema.pick({ allowedScopes: true }),
+          },
+          used: {
+            type: "boolean",
+            required: false,
+            defaultValue: false,
+            returned: false,
+          },
+          expiresAt: {
+            type: "date",
+            required: true,
+            returned: false,
+          },
+          userId: {
+            type: "string",
+            required: true,
+            returned: false,
+            references: {
+              model: "user",
+              field: "id",
+            },
+          },
+          applicationId: {
+            type: "string",
+            required: true,
+            returned: false,
+            references: {
+              model: "application",
+              field: "id",
+            },
+          },
+          createdAt: {
+            type: "date",
+            required: true,
+            returned: false,
+            defaultValue: "now",
+          },
+        },
+      },
       consent: {
         tableName: "consent",
         fields: {
